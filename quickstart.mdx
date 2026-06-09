@@ -1,0 +1,61 @@
+---
+title: "Quickstart"
+description: "Begin to use GT-VBAO or HBAO+ Plugins fast."
+---
+
+## Prerequisites
+
+Before you begin, you must have:
+
+- Unreal Engine 5.7 or later
+- Deferred Rendering enabled (Forward Rendering is not supported)
+
+## Get started
+
+<Steps>
+  <Step title="Install">
+    Enable the plugin in your project by going to **Edit → Plugins**, searching for **HBAO\+** (or **GT-VBAO**) and enabling it. Restart the editor when prompted.
+  </Step>
+  <Step title="Verify it's working">
+    Set the composite mode to `0` and enable Debug Mode to see the raw AO buffer in the viewport:
+
+    <CodeGroup>
+
+    ```text HBAO+
+    r.HBAOPlus.Mode 0
+    r.HBAOPlus.DebugMode 1
+    ```
+
+    ```text GT-VBAO
+    r.GTVBAO.Mode 0
+    r.GTVBAO.DebugMode 1
+    ```
+
+    </CodeGroup>
+
+    Set `DebugMode` back to `0` when done.
+  </Step>
+  <Step title="Switch to production mode">
+    Once everything looks correct, switch to Mode `1` for the best integration with Unreal's native pipeline:
+
+    <CodeGroup>
+
+    ```text HBAO+
+    r.HBAOPlus.Mode 1
+    r.HBAOPlus.DebugMode 0
+    ```
+
+    ```text GT-VBAO
+    r.GTVBAO.Mode 1
+    r.GTVBAO.DebugMode 0
+    ```
+
+    </CodeGroup>
+  </Step>
+</Steps>
+
+<Tip>
+  For optimal results, enable TAA or TSR (`r.AntiAliasingMethod 2`). This allows Temporal Accumulation to smooth out the AO signal over time, reducing noise and producing a cleaner result overall.
+</Tip>
+
+Need help? Join us on [Discord](https://discord.gg/SQna4DZEfQ).
