@@ -68,7 +68,7 @@ r.GTVBAO.Enabled 1
 
 ## Mode
 
-_(image)_
+<Compare before="/images/AOMode0.png" after="/images/AOMode1.png" beforeLabel="Mode 0" afterLabel="Mode 1" />
 
 Controls how the plugin integrates into the rendering pipeline.
 
@@ -90,7 +90,7 @@ r.GTVBAO.Mode 1
 
 ## Radius
 
-_(image)_
+<Compare before="/images/AORadius100.png" after="/images/AORadius500.png" beforeLabel="Radius 100" afterLabel="Radius 500" />
 
 Controls the AO radius in world units. Higher values extend occlusion further from surfaces.
 
@@ -110,7 +110,7 @@ r.GTVBAO.Radius 100.0
 
 ## Bias
 
-_(image)_
+<Compare before="/images/AOBias01.png" after="/images/AOBias05.png" beforeLabel="Bias 0.1" afterLabel="Bias 0.5" />
 
 Adjusts the self-occlusion threshold. Increase this value if you notice unwanted darkening on flat surfaces.
 
@@ -130,7 +130,7 @@ r.GTVBAO.Bias 0.1
 
 ## Intensity
 
-_(image)_
+<Compare before="/images/AOIntensity05.png" after="/images/AOIntensity1.png" beforeLabel="Intensity 0.5" afterLabel="Intensity 1" />
 
 Controls the overall strength of the AO effect.
 
@@ -150,7 +150,7 @@ r.GTVBAO.Intensity 1
 
 ## Quality
 
-_(image)_
+<Compare before="/images/AOQuality0.png" after="/images/AOQuality3.png" beforeLabel="Quality 0" afterLabel="Quality 3" />
 
 Sets the sample quality of the AO. Accepts values from `0` to `3`. Higher values produce cleaner results at the cost of performance.
 
@@ -188,7 +188,7 @@ r.GTVBAO.BlurSharpness 16.0
 
 ## Normal Sharpness
 
-_(image)_
+<Compare before="/images/AONormalSharpness0.png" after="/images/AONormalSharpness8.png" beforeLabel="Normal Sharpness 0" afterLabel="Normal Sharpness 8" />
 
 Controls the normal-based sharpness of the blur pass. Helps preserve occlusion detail along surface transitions.
 
@@ -208,7 +208,7 @@ r.GTVBAO.NormalSharpness 8.0
 
 ## Max Pixel Radius
 
-_(image)_
+<Compare before="/images/AOMaxPixelRadius16.png" after="/images/AOMaxPixelRadius100.png" beforeLabel="Max Pixel Radius 16" afterLabel="Max Pixel Radius 100" />
 
 Clamps the maximum screen-space radius of the AO to prevent over-sampling artifacts on surfaces close to the camera.
 
@@ -228,7 +228,7 @@ r.GTVBAO.MaxPixelRadius 100.0
 
 ## Half Resolution
 
-_(image)_
+<Compare before="/images/AOHalfRes0.png" after="/images/AOHalfRes1.png" beforeLabel="HalfRes 0" afterLabel="HalfRes 1" />
 
 Runs the AO at half resolution to improve performance. Disable for sharper results at the cost of additional GPU overhead.
 
@@ -250,7 +250,7 @@ r.GTVBAO.HalfRes 1
 
 ## Distance Fade Start
 
-_(image)_
+<Compare before="/images/AODistanceFadeStart2k.png" after="/images/AODistanceFadeStart15k.png" beforeLabel="Distance Fade Start 2000" afterLabel="Distance Fade Start 15000" />
 
 The distance in world units at which the AO effect begins to fade out.
 
@@ -270,7 +270,7 @@ r.GTVBAO.DistanceFadeStart 15000.0
 
 ## Distance Fade End
 
-_(image)_
+<Compare before="/images/AODistanceFadeEnd30k.png" after="/images/AODistanceFadeEnd50k.png" beforeLabel="Distance Fade End 30000" afterLabel="Distance Fade End 50000" />
 
 The distance in world units at which the AO effect is fully faded out.
 
@@ -290,7 +290,7 @@ r.GTVBAO.DistanceFadeEnd 30000.0
 
 ## Debug Mode
 
-_(image)_
+<Compare before="/images/AODebugMode0.png" after="/images/AODebugMode1.png" beforeLabel="Debug Mode 0" afterLabel="Debug Mode 1" />
 
 Visualizes the raw AO buffer, useful for tuning parameters.
 
@@ -312,7 +312,7 @@ r.GTVBAO.DebugMode 0
 
 ## Temporal Accumulation
 
-_(image)_
+<Compare before="/images/AOTemporalAccumulation0.png" after="/images/AOTemporalAccumulation1.png" beforeLabel="Temporal Accumulation 0" afterLabel="Temporal Accumulation 1" />
 
 Enables temporal accumulation and jittering for smoother results over time. Only active when TAA or TSR is enabled.
 
