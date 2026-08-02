@@ -12,27 +12,34 @@
     "dark": "/images/MGQLlogo.svg"
   },
   "navigation": {
-    "pages": [
+    "languages": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "groups": [
-      {
-        "group": "GT-VBAO / HBAO+",
-        "pages": [
-          "index",
-          "quickstart",
-          "settings"
-        ]
+        "language": "en",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "quickstart"
+            ]
+          }
+        ],
+        "footer": [],
+        "navbar": {}
       },
       {
-        "group": "Hybrid Stochastic Reflections",
-        "pages": []
+        "language": "es",
+        "groups": [
+          {
+            "group": "Comenzando",
+            "pages": [
+              "es/index",
+              "es/quickstart"
+            ]
+          }
+        ],
+        "footer": [],
+        "navbar": {}
       }
     ]
   },

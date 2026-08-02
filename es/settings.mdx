@@ -1,0 +1,347 @@
+---
+title: "Configuración"
+---
+
+export const Compare = ({ before, after, beforeLabel = "Antes", afterLabel = "Después", height = "420px" }) => {
+  const wrapRef = useRef(null);
+  const [pos, setPos] = useState(50);
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => setWidth(el.getBoundingClientRect().width);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const move = (clientX) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setPos(Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100)));
+  };
+  const onDown = (e) => {
+    e.preventDefault();
+    move(e.clientX);
+    const mv = (ev) => move(ev.clientX);
+    const up = () => { window.removeEventListener("pointermove", mv); window.removeEventListener("pointerup", up); };
+    window.addEventListener("pointermove", mv);
+    window.addEventListener("pointerup", up);
+  };
+  const lbl = { position: "absolute", bottom: 12, background: "rgba(0,0,0,0.6)", color: "#fff", padding: "4px 8px", fontSize: 12, borderRadius: 4, textTransform: "uppercase", letterSpacing: "0.5px", pointerEvents: "none", zIndex: 2 };
+  return (
+    <div ref={wrapRef} onPointerDown={onDown} style={{ position: "relative", width: "100%", height, overflow: "hidden", borderRadius: 12, userSelect: "none", touchAction: "none", cursor: "col-resize", background: "#000" }}>
+      <img src={after} alt={afterLabel} draggable={false} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none", margin: 0, padding: 0 }} />
+      <span style={{ ...lbl, right: 12 }}>{afterLabel}</span>
+      <div style={{ position: "absolute", top: 0, left: 0, bottom: 0, width: pos + "%", overflow: "hidden", zIndex: 2, pointerEvents: "none" }}>
+        <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: width ? width + "px" : "100vw" }}>
+          <img src={before} alt={beforeLabel} draggable={false} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", margin: 0, padding: 0 }} />
+        </div>
+        <span style={{ ...lbl, left: 12 }}>{beforeLabel}</span>
+      </div>
+      <div style={{ position: "absolute", top: 0, bottom: 0, left: pos + "%", width: 2, background: "#fff", zIndex: 3, transform: "translateX(-50%)", boxShadow: "0 0 10px rgba(0,0,0,0.5)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: "50%", left: pos + "%", transform: "translate(-50%,-50%)", width: 36, height: 36, background: "#fff", borderRadius: "50%", zIndex: 3, boxShadow: "0 2px 6px rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", color: "#333", pointerEvents: "none" }}>↔</div>
+    </div>
+  );
+};
+
+## Habilitado
+
+<Compare before="/images/AODisabled.png" after="/images/AOEnabled.png" beforeLabel="Habilitado 0" afterLabel="Habilitado 1" />
+
+Habilita o deshabilita el plugin por completo.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.Enabled 1
+```
+
+```text GT-VBAO
+r.GTVBAO.Enabled 1
+```
+
+</CodeGroup>
+
+---
+
+## Modo
+
+<Compare before="/images/AOMode0.png" after="/images/AOMode1.png" beforeLabel="Modo 0" afterLabel="Modo 1" />
+
+Controla cómo se integra el plugin en la canalización de renderizado.
+
+`0` — Paso de Post-Procesado, compuesto sobre SceneColor. `1` — Reemplaza el búfer ScreenSpaceAO durante el Pase Base Diferido. Este es el modo recomendado para la mayoría de proyectos.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.Mode 1
+```
+
+```text GT-VBAO
+r.GTVBAO.Mode 1
+```
+
+</CodeGroup>
+
+---
+
+## Radio
+
+<Compare before="/images/AORadius100.png" after="/images/AORadius500.png" beforeLabel="Radio 100" afterLabel="Radio 500" />
+
+Controla el radio de AO en unidades del mundo. Valores más altos extienden la oclusión más lejos de las superficies.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.Radius 100.0
+```
+
+```text GT-VBAO
+r.GTVBAO.Radius 100.0
+```
+
+</CodeGroup>
+
+---
+
+## Sesgo (Bias)
+
+<Compare before="/images/AOBias01.png" after="/images/AOBias05.png" beforeLabel="Sesgo 0.1" afterLabel="Sesgo 0.5" />
+
+Ajusta el umbral de auto-oclusión. Aumenta este valor si notas oscurecimiento no deseado en superficies planas.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.Bias 0.1
+```
+
+```text GT-VBAO
+r.GTVBAO.Bias 0.1
+```
+
+</CodeGroup>
+
+---
+
+## Intensidad
+
+<Compare before="/images/AOIntensity05.png" after="/images/AOIntensity1.png" beforeLabel="Intensidad 0.5" afterLabel="Intensidad 1" />
+
+Controla la fuerza general del efecto de AO.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.Intensity 1.5
+```
+
+```text GT-VBAO
+r.GTVBAO.Intensity 1
+```
+
+</CodeGroup>
+
+---
+
+## Calidad
+
+<Compare before="/images/AOQuality0.png" after="/images/AOQuality3.png" beforeLabel="Calidad 0" afterLabel="Calidad 3" />
+
+Establece la calidad de muestreo del AO. Acepta valores de `0` a `3`. Valores más altos producen resultados más limpios a costa de rendimiento.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.Quality 2
+```
+
+```text GT-VBAO
+r.GTVBAO.Quality 2
+```
+
+</CodeGroup>
+
+---
+
+## Nitidez del Desenfoque (Blur Sharpness)
+
+Controla la nitidez basada en profundidad del paso de desenfoque. Valores más altos preservan los bordes de forma más agresiva.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.BlurSharpness 16.0
+```
+
+```text GT-VBAO
+r.GTVBAO.BlurSharpness 16.0
+```
+
+</CodeGroup>
+
+---
+
+## Nitidez de Normales (Normal Sharpness)
+
+<Compare before="/images/AONormalSharpness0.png" after="/images/AONormalSharpness8.png" beforeLabel="Nitidez de Normales 0" afterLabel="Nitidez de Normales 8" />
+
+Controla la nitidez basada en normales del paso de desenfoque. Ayuda a preservar el detalle de oclusión a lo largo de las transiciones de superficie.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.NormalSharpness 8.0
+```
+
+```text GT-VBAO
+r.GTVBAO.NormalSharpness 8.0
+```
+
+</CodeGroup>
+
+---
+
+## Radio Máximo en Píxeles (Max Pixel Radius)
+
+<Compare before="/images/AOMaxPixelRadius16.png" after="/images/AOMaxPixelRadius100.png" beforeLabel="Radio Máx. Píxeles 16" afterLabel="Radio Máx. Píxeles 100" />
+
+Limita el radio máximo en espacio de pantalla del AO para evitar artefactos de sobre-muestreo en superficies cercanas a la cámara.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.MaxPixelRadius 100.0
+```
+
+```text GT-VBAO
+r.GTVBAO.MaxPixelRadius 100.0
+```
+
+</CodeGroup>
+
+---
+
+## Resolución Mitad (Half Resolution)
+
+<Compare before="/images/AOHalfRes0.png" after="/images/AOHalfRes1.png" beforeLabel="MitadRes 0" afterLabel="MitadRes 1" />
+
+Ejecuta el AO a mitad de resolución para mejorar el rendimiento. Deshabilita para resultados más nítidos a costa de sobrecarga adicional de GPU.
+
+`0` — Resolución completa `1` — Mitad de resolución
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.HalfRes 1
+```
+
+```text GT-VBAO
+r.GTVBAO.HalfRes 1
+```
+
+</CodeGroup>
+
+---
+
+## Inicio del Desvanecimiento por Distancia (Distance Fade Start)
+
+<Compare before="/images/AODistanceFadeStart2k.png" after="/images/AODistanceFadeStart15k.png" beforeLabel="Inicio Fade Distancia 2000" afterLabel="Inicio Fade Distancia 15000" />
+
+La distancia en unidades del mundo a la que el efecto de AO comienza a desvanecerse.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.DistanceFadeStart 15000.0
+```
+
+```text GT-VBAO
+r.GTVBAO.DistanceFadeStart 15000.0
+```
+
+</CodeGroup>
+
+---
+
+## Fin del Desvanecimiento por Distancia (Distance Fade End)
+
+<Compare before="/images/AODistanceFadeEnd30k.png" after="/images/AODistanceFadeEnd50k.png" beforeLabel="Fin Fade Distancia 30000" afterLabel="Fin Fade Distancia 50000" />
+
+La distancia en unidades del mundo a la que el efecto de AO se desvanece completamente.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.DistanceFadeEnd 30000.0
+```
+
+```text GT-VBAO
+r.GTVBAO.DistanceFadeEnd 50000.0
+```
+
+</CodeGroup>
+
+---
+
+## Modo Depuración (Debug Mode)
+
+<Compare before="/images/AODebugMode0.png" after="/images/AODebugMode1.png" beforeLabel="Modo Depuración 0" afterLabel="Modo Depuración 1" />
+
+Visualiza el búfer AO sin procesar, útil para ajustar parámetros.
+
+`0` — Desactivado `1` — Solo AO
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.DebugMode 0
+```
+
+```text GT-VBAO
+r.GTVBAO.DebugMode 0
+```
+
+</CodeGroup>
+
+---
+
+## Acumulación Temporal (Temporal Accumulation)
+
+<Compare before="/images/AOTemporalAccumulation0.png" after="/images/AOTemporalAccumulation1.png" beforeLabel="Acumulación Temporal 0" afterLabel="Acumulación Temporal 1" />
+
+Habilita la acumulación temporal y el jittering para obtener resultados más suaves a lo largo del tiempo. Solo está activo cuando TAA o TSR están habilitados.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.TemporalAccumulation 1
+```
+
+```text GT-VBAO
+r.GTVBAO.TemporalAccumulation 1
+```
+
+</CodeGroup>
+
+---
+
+## Mezcla Temporal (Temporal Blend)
+
+Controla cuánta historia se acumula por cuadro. Valores más altos producen resultados más suaves pero pueden introducir efectos de estela en geometría en movimiento rápido.
+
+<CodeGroup>
+
+```text HBAO+
+r.HBAOPlus.TemporalBlend 0.95
+```
+
+```text GT-VBAO
+r.GTVBAO.TemporalBlend 0.95
+```
+
+</CodeGroup>

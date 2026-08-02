@@ -1,0 +1,67 @@
+---
+title: "Inicio rápido"
+description: "Comienza a usar los plugins GT-VBAO o HBAO+ rápidamente."
+---
+
+## Requisitos previos
+
+Antes de comenzar, debes tener:
+
+- Unreal Engine 5
+- Renderizado diferido habilitado (el renderizado directo no es compatible)
+
+## Comenzar
+
+<Steps>
+  <Step title="Instalar">
+    Habilita el plugin en tu proyecto yendo a **Editar → Plugins**, buscando **HBAO\+** (o **GT-VBAO**) y habilitándolo. Reinicia el editor cuando se te solicite.
+  </Step>
+  <Step title="Verificar que funciona">
+    Establece el modo de composición en `0` y habilita el Modo Depuración para ver el búfer AO sin procesar en la ventana:
+
+    <CodeGroup>
+
+    ```text HBAO+
+    r.HBAOPlus.Mode 0
+    r.HBAOPlus.DebugMode 1
+    ```
+
+    ```text GT-VBAO
+    r.GTVBAO.Mode 0
+    r.GTVBAO.DebugMode 1
+    ```
+
+    </CodeGroup>
+
+    Puedes ejecutar estos comandos usando la consola (presiona ~ en la ventana) o mediante la entrada de Cmd en el Registro de salida.
+
+    Restablece `DebugMode` a `0` cuando termines.
+  </Step>
+  <Step title="Cambiar al modo de producción">
+    Una vez que todo se vea correcto, cambia al Modo `1` para la mejor integración con la canalización nativa de Unreal:
+
+    <CodeGroup>
+
+    ```text HBAO+
+    r.HBAOPlus.Mode 1
+    r.HBAOPlus.DebugMode 0
+    ```
+
+    ```text GT-VBAO
+    r.GTVBAO.Mode 1
+    r.GTVBAO.DebugMode 0
+    ```
+
+    </CodeGroup>
+  </Step>
+</Steps>
+
+<Tip>
+  Para obtener resultados óptimos, habilita TAA o TSR (`r.AntiAliasingMethod 2`). Esto permite que la acumulación temporal suavice la señal AO a lo largo del tiempo, reduciendo el ruido y produciendo un resultado más limpio en general.
+</Tip>
+
+<Warning>
+  La canalización nativa de Unreal no funciona en 5.0. Substrate es compatible con 5.5\+.
+</Warning>
+
+¿Necesitas ayuda? Únete a nosotros en [Discord](https://discord.gg/SQna4DZEfQ).
