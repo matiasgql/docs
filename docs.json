@@ -15,45 +15,29 @@
     "languages": [
       {
         "language": "en",
-        "href": "/docs",
-        "pages": ["index", "quickstart"],
-        "products": [],
-        "versions": [],
-        "tabs": [],
-        "dropdowns": [],
-        "anchors": [],
         "groups": [
           {
             "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart"
+              "quickstart",
+              "settings"
             ]
           }
-        ],
-        "footer": {},
-        "navbar": {}
+        ]
       },
       {
         "language": "es",
-        "href": "/docs/es",
-        "pages": ["es/index", "es/quickstart"],
-        "products": [],
-        "versions": [],
-        "tabs": [],
-        "dropdowns": [],
-        "anchors": [],
         "groups": [
           {
             "group": "Comenzando",
             "pages": [
               "es/index",
-              "es/quickstart"
+              "es/quickstart",
+              "es/settings"
             ]
           }
-        ],
-        "footer": {},
-        "navbar": {}
+        ]
       }
     ]
   },
