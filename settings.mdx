@@ -1,4 +1,4 @@
----
+﻿---
 title: "Settings"
 ---
 
@@ -52,17 +52,9 @@ export const Compare = ({ before, after, beforeLabel = "Before", afterLabel = "A
 
 Enable or disable the plugin entirely
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.Enabled 1
+```text
+r.AO.Enabled 1
 ```
-
-```text GT-VBAO
-r.GTVBAO.Enabled 1
-```
-
-</CodeGroup>
 
 ---
 
@@ -74,17 +66,9 @@ Controls how the plugin integrates into the rendering pipeline.
 
 `0` — Post Process Pass, composited on top of SceneColor. `1` — Replaces the ScreenSpaceAO buffer during the Deferred Base Pass. This is the recommended mode for most projects.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.Mode 1
+```text
+r.AO.Mode 1
 ```
-
-```text GT-VBAO
-r.GTVBAO.Mode 1
-```
-
-</CodeGroup>
 
 ---
 
@@ -94,17 +78,9 @@ r.GTVBAO.Mode 1
 
 Controls the AO radius in world units. Higher values extend occlusion further from surfaces.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.Radius 100.0
+```text
+r.AO.Radius 100.0
 ```
-
-```text GT-VBAO
-r.GTVBAO.Radius 100.0
-```
-
-</CodeGroup>
 
 ---
 
@@ -114,17 +90,9 @@ r.GTVBAO.Radius 100.0
 
 Adjusts the self-occlusion threshold. Increase this value if you notice unwanted darkening on flat surfaces.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.Bias 0.1
+```text
+r.AO.Bias 0.1
 ```
-
-```text GT-VBAO
-r.GTVBAO.Bias 0.1
-```
-
-</CodeGroup>
 
 ---
 
@@ -134,17 +102,9 @@ r.GTVBAO.Bias 0.1
 
 Controls the overall strength of the AO effect.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.Intensity 1.5
+```text
+r.AO.Intensity 1.5
 ```
-
-```text GT-VBAO
-r.GTVBAO.Intensity 1
-```
-
-</CodeGroup>
 
 ---
 
@@ -154,17 +114,9 @@ r.GTVBAO.Intensity 1
 
 Sets the sample quality of the AO. Accepts values from `0` to `3`. Higher values produce cleaner results at the cost of performance.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.Quality 2
+```text
+r.AO.Quality 2
 ```
-
-```text GT-VBAO
-r.GTVBAO.Quality 2
-```
-
-</CodeGroup>
 
 ---
 
@@ -172,17 +124,21 @@ r.GTVBAO.Quality 2
 
 Controls the depth-based sharpness of the blur pass. Higher values preserve edges more aggressively.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.BlurSharpness 16.0
+```text
+r.AO.BlurSharpness 16.0
 ```
 
-```text GT-VBAO
-r.GTVBAO.BlurSharpness 16.0
-```
+---
 
-</CodeGroup>
+## Blur Enabled
+
+Enable or disable the AO blur pass.
+
+`0` — Disabled `1` — Enabled
+
+```text
+r.AO.BlurEnabled 0
+```
 
 ---
 
@@ -192,17 +148,9 @@ r.GTVBAO.BlurSharpness 16.0
 
 Controls the normal-based sharpness of the blur pass. Helps preserve occlusion detail along surface transitions.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.NormalSharpness 8.0
+```text
+r.AO.NormalSharpness 8.0
 ```
-
-```text GT-VBAO
-r.GTVBAO.NormalSharpness 8.0
-```
-
-</CodeGroup>
 
 ---
 
@@ -212,17 +160,9 @@ r.GTVBAO.NormalSharpness 8.0
 
 Clamps the maximum screen-space radius of the AO to prevent over-sampling artifacts on surfaces close to the camera.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.MaxPixelRadius 100.0
+```text
+r.AO.MaxPixelRadius 100.0
 ```
-
-```text GT-VBAO
-r.GTVBAO.MaxPixelRadius 100.0
-```
-
-</CodeGroup>
 
 ---
 
@@ -234,17 +174,9 @@ Runs the AO at half resolution to improve performance. Disable for sharper resul
 
 `0` — Full resolution `1` — Half resolution
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.HalfRes 1
+```text
+r.AO.HalfRes 1
 ```
-
-```text GT-VBAO
-r.GTVBAO.HalfRes 1
-```
-
-</CodeGroup>
 
 ---
 
@@ -254,17 +186,9 @@ r.GTVBAO.HalfRes 1
 
 The distance in world units at which the AO effect begins to fade out.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.DistanceFadeStart 15000.0
+```text
+r.AO.DistanceFadeStart 15000.0
 ```
-
-```text GT-VBAO
-r.GTVBAO.DistanceFadeStart 15000.0
-```
-
-</CodeGroup>
 
 ---
 
@@ -274,17 +198,9 @@ r.GTVBAO.DistanceFadeStart 15000.0
 
 The distance in world units at which the AO effect is fully faded out.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.DistanceFadeEnd 30000.0
+```text
+r.AO.DistanceFadeEnd 30000.0
 ```
-
-```text GT-VBAO
-r.GTVBAO.DistanceFadeEnd 30000.0
-```
-
-</CodeGroup>
 
 ---
 
@@ -296,37 +212,21 @@ Visualizes the raw AO buffer, useful for tuning parameters.
 
 `0` — Off `1` — AO Only
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.DebugMode 0
+```text
+r.AO.DebugMode 0
 ```
-
-```text GT-VBAO
-r.GTVBAO.DebugMode 0
-```
-
-</CodeGroup>
 
 ---
 
-## Temporal Accumulation
+## Temporal Jittering
 
-<Compare before="/images/AOTemporalAccumulation0.png" after="/images/AOTemporalAccumulation1.png" beforeLabel="Temporal Accumulation 0" afterLabel="Temporal Accumulation 1" />
+<Compare before="/images/AOTemporalJittering0.png" after="/images/AOTemporalJittering1.png" beforeLabel="Temporal Jittering 0" afterLabel="Temporal Jittering 1" />
 
 Enables temporal accumulation and jittering for smoother results over time. Only active when TAA or TSR is enabled.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.TemporalAccumulation 1
+```text
+r.AO.TemporalJittering 1
 ```
-
-```text GT-VBAO
-r.GTVBAO.TemporalAccumulation 1
-```
-
-</CodeGroup>
 
 ---
 
@@ -334,14 +234,18 @@ r.GTVBAO.TemporalAccumulation 1
 
 Controls how much history is accumulated per frame. Higher values produce smoother results but may introduce ghosting on fast-moving geometry.
 
-<CodeGroup>
-
-```text HBAO+
-r.HBAOPlus.TemporalBlend 0.95
+```text
+r.AO.TemporalBlend 0.95
 ```
 
-```text GT-VBAO
-r.GTVBAO.TemporalBlend 0.95
-```
+---
 
-</CodeGroup>
+## Algorithm
+
+Selects the AO algorithm. This setting is exclusive to GT-VBAO.
+
+`0` — GT-VBAO `1` — HBAO+
+
+```text
+r.AO.Algorithm 0
+```
