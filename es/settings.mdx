@@ -220,7 +220,7 @@ r.AO.DebugMode 0
 
 ## Acumulación Temporal (Temporal Accumulation)
 
-<Compare before="/images/AOTemporalJittering0.png" after="/images/AOTemporalJittering1.png" beforeLabel="Acumulación Temporal 0" afterLabel="Acumulación Temporal 1" />
+<Compare before="/images/AOTemporalAccumulation0.png" after="/images/AOTemporalAccumulation1.png" beforeLabel="Fluctuación Temporal 0" afterLabel="Fluctuación Temporal 1" />
 
 Habilita la acumulación temporal y el jittering para obtener resultados más suaves a lo largo del tiempo. Solo está activo cuando TAA o TSR están habilitados.
 
@@ -230,17 +230,9 @@ r.AO.TemporalJittering 1
 
 ---
 
-## Mezcla Temporal (Temporal Blend)
-
-Controla cuánta historia se acumula por cuadro. Valores más altos producen resultados más suaves pero pueden introducir efectos de estela en geometría en movimiento rápido.
-
-```text
-r.AO.TemporalBlend 0.95
-```
-
----
-
 ## Algoritmo (Algorithm)
+
+<Compare before="/images/AOAlgorithm0.png" after="/images/AOAlgorithm1.png" beforeLabel="Algoritmo 0 (GT-VBAO)" afterLabel="Algoritmo 1 (HBAO+)" />
 
 Selecciona el algoritmo de AO. Este ajuste es exclusivo de GT-VBAO.
 
@@ -248,4 +240,28 @@ Selecciona el algoritmo de AO. Este ajuste es exclusivo de GT-VBAO.
 
 ```text
 r.AO.Algorithm 0
+```
+
+---
+
+## Atenuación de niebla (Fog Attenuation)
+
+<Compare before="/images/AOFogAttenuation0.png" after="/images/AOFogAttenuation1.png" beforeLabel="Fog Attenuation 0" afterLabel="Fog Attenuation 1" />
+
+Habilita la atenuación del efecto AO dentro de volúmenes de niebla. Cuando está activo, el AO se desvanece en las áreas afectadas por niebla, produciendo un resultado más natural.
+
+`0` — Desactivado `1` — Activado
+
+```text
+r.AO.FogAttenuation 1
+```
+
+---
+
+## Intensidad de atenuación de niebla (Fog Attenuation Amount)
+
+Controla la fuerza de la atenuación de AO basada en niebla. Valores más altos hacen que el AO se desvanezca más agresivamente dentro de la niebla.
+
+```text
+r.AO.FogAttenuation.Amount 1.0
 ```

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Settings"
 ---
 
@@ -230,17 +230,9 @@ r.AO.TemporalJittering 1
 
 ---
 
-## Temporal Blend
-
-Controls how much history is accumulated per frame. Higher values produce smoother results but may introduce ghosting on fast-moving geometry.
-
-```text
-r.AO.TemporalBlend 0.95
-```
-
----
-
 ## Algorithm
+
+<Compare before="/images/AOAlgorithm0.png" after="/images/AOAlgorithm1.png" beforeLabel="Algorithm 0 (GT-VBAO)" afterLabel="Algorithm 1 (HBAO+)" />
 
 Selects the AO algorithm. This setting is exclusive to GT-VBAO.
 
@@ -248,4 +240,28 @@ Selects the AO algorithm. This setting is exclusive to GT-VBAO.
 
 ```text
 r.AO.Algorithm 0
+```
+
+---
+
+## Fog Attenuation
+
+<Compare before="/images/AOFogAttenuation0.png" after="/images/AOFogAttenuation1.png" beforeLabel="Fog Attenuation 0" afterLabel="Fog Attenuation 1" />
+
+Enables attenuation of the AO effect inside fog volumes. When enabled, AO fades out in areas affected by fog, producing a more natural look.
+
+`0` — Disabled `1` — Enabled
+
+```text
+r.AO.FogAttenuation 1
+```
+
+---
+
+## Fog Attenuation Amount
+
+Controls the strength of the fog-based AO attenuation. Higher values cause AO to fade out more aggressively inside fog.
+
+```text
+r.AO.FogAttenuation.Amount 1.0
 ```
